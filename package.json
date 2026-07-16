@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "build": "node src/index.js"
+    "build": "echo \"No build required\""
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
