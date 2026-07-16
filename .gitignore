@@ -1,0 +1,55 @@
+# Dependencies
+node_modules/
+jspm_packages/
+.npm
+
+# Environment / secrets
+.env
+.env.local
+.env.production
+.env.development
+.env.test
+.env*.local
+*.pem
+*.key
+
+# Logs
+logs
+*.log
+npm-debug.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Runtime / process data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Test / coverage output
+coverage/
+*.lcov
+.nyc_output/
+
+# Caches
+.cache/
+.npm/
+.eslintcache
+.node_repl_history
+
+# Build output
+dist/
+build/
+out/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
