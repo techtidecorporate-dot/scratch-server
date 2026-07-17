@@ -7,6 +7,7 @@
     "node": ">=18"
   },
   "scripts": {
+    "prestart": "node scripts/install-chrome.js --ensure-only",
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "build": "node scripts/install-chrome.js"

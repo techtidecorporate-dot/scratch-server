@@ -17,6 +17,17 @@ import { dirname, join } from 'path';
 const require = createRequire(import.meta.url);
 
 /**
+ * --ensure-only re-applies permissions without ever downloading. It runs from
+ * `prestart`, because a deploy that copies the built app into its runtime
+ * directory can drop execute bits that were set at build time; re-applying them
+ * after that copy is the only thing that survives it.
+ *
+ * It must never download: a cold 150MB fetch during boot would risk the
+ * platform's start timeout and take the whole API down, not just the scraper.
+ */
+const ensureOnly = process.argv.includes('--ensure-only');
+
+/**
  * Puppeteer does not chmod the browser it downloads. The execute bit comes
  * solely from the zip's external file attributes, applied by extract-zip via
  * `createWriteStream(dest, {mode})` — and open(2) masks that mode with the
@@ -97,9 +108,18 @@ try {
     verifyLaunchable(path);
     process.exit(0);
   }
-  console.log(`Chrome expected at ${path} but not found — installing.`);
+  console.log(`Chrome expected at ${path} but not found.`);
 } catch {
-  console.log('Chrome not resolvable — installing.');
+  console.log('Chrome not resolvable.');
+}
+
+if (ensureOnly) {
+  console.warn(
+    'WARNING: no browser to prepare — the Lead Finder will return no results.\n' +
+      '  Run `npm run build` to install it. Not downloading during startup, so the\n' +
+      '  rest of the API still comes up.'
+  );
+  process.exit(0);
 }
 
 // Resolve the CLI through the installed package rather than `npx`, which may hit

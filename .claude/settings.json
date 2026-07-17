@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node --check scripts/install-chrome.js)",
+      "Bash(node scripts/install-chrome.js --ensure-only)",
+      "Bash(echo \"exit code: $? \\(must be 0 so boot proceeds\\)\")",
+      "Bash(PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium node scripts/install-chrome.js --ensure-only)",
+      "Bash(echo \"exit code: $?\")",
+      "Bash(timeout 12 npm start)"
+    ]
+  }
+}
