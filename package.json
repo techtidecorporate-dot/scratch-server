@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
-    "build": "echo \"No build required\""
+    "build": "node scripts/install-chrome.js"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.1.0",
